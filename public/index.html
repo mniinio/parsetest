@@ -12,14 +12,14 @@
   <link rel="stylesheet" href="style_task.css"
 </head>
 <body>
-  <div class="ui container">
+  <div class="ui container greenbrg">
     <!-- Navigation Menu -->
     <div class="ui four item inverted green menu">
       <div class="header item green">
         <b style="font-size: 25">E-ven</b>
       </div>
       <a class="item green" href="/">
-        Dashboard
+        Tasks
       </a>
       <a class="item green" href="/exchange">
         Dashboard
@@ -45,7 +45,7 @@
 
     <!-- Task Template -->
     <script id="rates-template" type="text/x-handlebars-template">
-        <h1 class="ui header">Your Tasks</h1>
+        <h1 class="ui header white user-pad text-center">Your Tasks</h1>
         <hr>
         <svg viewBox="0 0 0 0" style="position: absolute; z-index: -1; opacity: 0;">
   <defs>
@@ -65,8 +65,7 @@
     <circle id="todo__circle" cx="13.5" cy="12.5" r="10"></circle>
   </defs>
 </svg>
-
-
+<div class="ui container greenbrg user-pad">
 <div class="todo-list">
   <label class="todo">
     <input class="todo__state" type="checkbox" />
@@ -122,15 +121,17 @@
 
     <div class="todo__text">Sauna at 22.30</div>
 
+
   </label>
+</div>
 </div>
     </script>
 
     <script id="exchange-template" type="text/x-handlebars-template">
-        <h1 class="ui header">Your Energy Consumption</h1>
+        <h1 class="ui header white user-pad text-center">Your Energy Consumption</h1>
         <hr>
-        <div class="resp-container" style="position: relative; overflow: hidden;">
-        <iframe width="100%" height="300" src="//jsfiddle.net/zhk6qL58/3/embedded/result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+        <div class="ui container" style="position: relative; overflow: hidden;">
+        <iframe width="100%" height="600" src="//jsfiddle.net/zhk6qL58/3/embedded/result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
       </div>
       </script>
 
@@ -169,7 +170,7 @@
                         <h3>Welcome back, Jessica</h3>
                         <h4 class="white"><i class="fa fa-check-circle-o"></i> Tuusula</h4>
                       <h4 class="white"><i class="fa fa-twitter"></i> Finland</h4>
-                      <button type="button" class="btn btn-labeled btn-info" href="#">
+                      <button type="button" class="btn btn-labeled btn-info greenbrg" href="#">
                           <span class="btn-label"><i class="fa fa-pencil"></i></span>Update</button>
                   </div>
               </div>

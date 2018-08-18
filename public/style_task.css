@@ -1,7 +1,7 @@
 .todo-list {
-  background: #FFF;
+  background: #fff;
   font-size: 20px;
-  max-width: 15em;
+  width: 100%;
   margin: auto;
   padding: 0.5em 1em;
   box-shadow: 0 5px 30px rgba(0,0,0,0.2);
@@ -104,9 +104,7 @@
 .todo__state:checked ~ .todo__icon .todo__circle {
   animation-name: explode;
 }
-html {
-  background: #ddd;
-}
+
 html {
   height: 100%;
   display: flex;
@@ -114,4 +112,14 @@ html {
 body {
   width: 100%;
   margin: auto;
+}
+
+.task-msg {
+  @include transform(translate3d(0, -50%, 0));
+  right: 40px;
+  top: 47%;
+  position: absolute;
+  text-transform: uppercase;
+  font-size: 12px;
+  opacity: 0;
 }
