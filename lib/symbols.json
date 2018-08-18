@@ -1,0 +1,9 @@
+{
+  "success": true,
+  "symbols": {
+    "USD": "United States Dollar",
+    "EUR": "Euro",
+    "GBP": "Pound",
+    "AMD": "Armenian Dram"
+  }
+}
