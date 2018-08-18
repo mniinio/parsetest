@@ -8,23 +8,23 @@
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-  <link href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css" rel="stylesheet" media="screen">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style_task.css"
 </head>
 <body>
   <div class="ui container">
     <!-- Navigation Menu -->
-    <div class="ui four item inverted red menu">
-      <div class="header item">
-        E-ven
+    <div class="ui four item inverted green menu">
+      <div class="header item green">
+        <b style="font-size: 25">E-ven</b>
       </div>
-      <a class="item" href="/">
-        Tasks
-      </a>
-      <a class="item" href="/exchange">
+      <a class="item green" href="/">
         Dashboard
       </a>
-      <a class="item" href="/profile">
+      <a class="item green" href="/exchange">
+        Dashboard
+      </a>
+      <a class="item green" href="/profile">
         Profile
       </a>
     </div>
@@ -43,89 +43,95 @@
         </div>
     </script>
 
-    <!-- Currency Rates Template -->
+    <!-- Task Template -->
     <script id="rates-template" type="text/x-handlebars-template">
-        <h1 class="ui header">Currency Rates</h1>
+        <h1 class="ui header">Your Tasks</h1>
         <hr>
-        <div class="ui loading basic segment">
-        <div class="ui horizontal list">
-            <div class="item">
-            <i class="calendar alternate outline icon"></i>
-            <div class="content">
-                <div class="ui sub header">Date</div>
-                <span>{{date}}</span>
-            </div>
-            </div>
-            <div class="item">
-            <i class="money bill alternate outline icon"></i>
-            <div class="content">
-                <div class="ui sub header">Base</div>
-                <span>{{base}}</span>
-            </div>
-            </div>
-        </div>
+        <svg viewBox="0 0 0 0" style="position: absolute; z-index: -1; opacity: 0;">
+  <defs>
+    <linearGradient id="boxGradient" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="25" y2="25">
+      <stop offset="0%"   stop-color="#27FDC7"/>
+      <stop offset="100%" stop-color="#0FC0F5"/>
+    </linearGradient>
 
-        <table class="ui celled striped selectable inverted table">
-            <thead>
-            <tr>
-                <th>Code</th>
-                <th>Rate</th>
-            </tr>
-            </thead>
-            <tbody>
-            {{#each rates}}
-            <tr>
-                <td>{{@key}}</td>
-                <td>{{this}}</td>
-            </tr>
-            {{/each}}
-            </tbody>
-        </table>
-        </div>
-      </div>
-      <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg"><g transform="translate(100, 100)"><g display="none"><path d="M4.329780281177466e-15,-70.71067811865476A70.71067811865476,70.71067811865476,0,1,1,-4.329780281177466e-15,70.71067811865476A70.71067811865476,70.71067811865476,0,1,1,4.329780281177466e-15,-70.71067811865476Z" style="stroke: rgb(255, 255, 255); fill: rgb(191, 105, 105); fill-rule: evenodd;"></path><text transform="translate(2.164890140588733e-15,35.35533905932738)rotate(90)" text-anchor="middle" dx="6" dy=".35em" style="font-size: 11px; font-family: Arial, Helvetica;"></text><title>undefined: none</title></g><g><path d="M6.123233995736766e-15,-100A100,100,0,1,1,-40.99497753837391,91.21080975755132L-28.98782661197439,64.49578209708065A70.71067811865476,70.71067811865476,0,1,0,4.329780281177466e-15,-70.71067811865476Z" style="stroke: rgb(255, 255, 255); fill: rgb(191, 105, 105); fill-rule: evenodd;"></path><text transform="translate(83.45875740955812,17.89328694190269)rotate(12.100839904509836)" text-anchor="middle" dx="6" dy=".35em" style="font-size: 11px; font-family: Arial, Helvetica;">Päiväsiirto</text><title>Päiväsiirto: 9,939</title></g><g><path d="M-40.99497753837391,91.21080975755132A100,100,0,0,1,-1.9600538592723537e-13,-100L-1.3859673753823443e-13,-70.71067811865476A70.71067811865476,70.71067811865476,0,0,0,-28.98782661197439,64.49578209708065Z" style="stroke: rgb(255, 255, 255); fill: rgb(105, 191, 191); fill-rule: evenodd;"></path><text transform="translate(-83.45875740955813,-17.893286941902627)rotate(372.1008399045098)" text-anchor="middle" dx="6" dy=".35em" style="font-size: 11px; font-family: Arial, Helvetica;">Yösiirto</text><title>Yösiirto: 7,583</title></g></g></svg>
-    </div>
+    <linearGradient id="lineGradient">
+      <stop offset="0%"    stop-color="#0FC0F5"/>
+      <stop offset="100%"  stop-color="#27FDC7"/>
+    </linearGradient>
+
+    <path id="todo__line" stroke="url(#lineGradient)" d="M21 12.3h168v0.1z"></path>
+    <path id="todo__box" stroke="url(#boxGradient)" d="M21 12.7v5c0 1.3-1 2.3-2.3 2.3H8.3C7 20 6 19 6 17.7V7.3C6 6 7 5 8.3 5h10.4C20 5 21 6 21 7.3v5.4"></path>
+    <path id="todo__check" stroke="url(#boxGradient)" d="M10 13l2 2 5-5"></path>
+    <circle id="todo__circle" cx="13.5" cy="12.5" r="10"></circle>
+  </defs>
+</svg>
+
+
+<div class="todo-list">
+  <label class="todo">
+    <input class="todo__state" type="checkbox" />
+
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 25" class="todo__icon">
+      <use xlink:href="#todo__line" class="todo__line"></use>
+      <use xlink:href="#todo__box" class="todo__box"></use>
+      <use xlink:href="#todo__check" class="todo__check"></use>
+      <use xlink:href="#todo__circle" class="todo__circle"></use>
+    </svg>
+
+    <div class="todo__text">Turn off your light</div>
+
+  </label>
+
+  <label class="todo">
+
+    <input class="todo__state" type="checkbox" />
+
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 25" class="todo__icon">
+      <use xlink:href="#todo__line" class="todo__line"></use>
+      <use xlink:href="#todo__box" class="todo__box"></use>
+      <use xlink:href="#todo__check" class="todo__check"></use>
+      <use xlink:href="#todo__circle" class="todo__circle"></use>
+    </svg>
+
+    <div class="todo__text">Adjust your thermostat to 20 degrees</div>
+
+  </label>
+
+  <label class="todo">
+    <input class="todo__state" type="checkbox" />
+
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 25" class="todo__icon">
+      <use xlink:href="#todo__line" class="todo__line"></use>
+      <use xlink:href="#todo__box" class="todo__box"></use>
+      <use xlink:href="#todo__check" class="todo__check"></use>
+      <use xlink:href="#todo__circle" class="todo__circle"></use>
+    </svg>
+
+    <div class="todo__text">Defrost the freezer</div>
+  </label>
+
+  <label class="todo">
+    <input class="todo__state" type="checkbox" />
+
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 25" class="todo__icon">
+      <use xlink:href="#todo__line" class="todo__line"></use>
+      <use xlink:href="#todo__box" class="todo__box"></use>
+      <use xlink:href="#todo__check" class="todo__check"></use>
+      <use xlink:href="#todo__circle" class="todo__circle"></use>
+    </svg>
+
+    <div class="todo__text">Sauna at 22.30</div>
+
+  </label>
+</div>
     </script>
 
     <script id="exchange-template" type="text/x-handlebars-template">
-        <h1 class="ui header">Exchange Rate</h1>
+        <h1 class="ui header">Your Energy Consumption</h1>
         <hr>
-        <div class="ui basic loading segment">
-          <form class="ui form">
-            <div class="three fields">
-              <div class="field">
-                <label>From</label>
-                <select class="ui dropdown" name="from" id="from">
-                  <option value="">Select Currency</option>
-                  {{#each symbols}}
-                    <option value="{{@key}}">{{this}}</option>
-                  {{/each}}
-                </select>
-              </div>
-              <div class="field">
-                <label>To</label>
-                <select class="ui dropdown" name="to" id="to">
-                  <option value="">Select Currency</option>
-                  {{#each symbols}}
-                    <option value="{{@key}}">{{this}}</option>
-                  {{/each}}
-                </select>
-              </div>
-              <div class="field">
-                <label>Amount</label>
-                <input type="number" name="amount" id="amount" placeholder="Enter amount">
-              </div>
-            </div>
-            <div class="ui primary submit button">Convert</div>
-            <div class="ui error message"></div>
-          </form>
-          <br>
-          <div id="result-segment" class="ui center aligned segment">
-            <h2 id="result" class="ui header">
-              0.00
-            </h2>
-          </div>
-        </div>
+        <div class="resp-container" style="position: relative; overflow: hidden;">
+        <iframe width="100%" height="300" src="//jsfiddle.net/zhk6qL58/3/embedded/result/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+      </div>
       </script>
 
       <script id="historical-template" type="text/x-handlebars-template">
@@ -157,7 +163,7 @@
         <div class="container">
           <div class="row user-menu-container square">
             <div class="col-md-7 user-details">
-              <div class="row coralbg white">
+              <div class="row greenbrg white">
                 <div class="col-md-6 no-pad">
                     <div class="user-pad">
                         <h3>Welcome back, Jessica</h3>
@@ -184,23 +190,23 @@
               </div>
               <div class="col-md-4 user-pad text-center">
                   <h3>Your Saving</h3>
-                  <h4>€ 4,901</h4>
+                  <h4>€ 490</h4>
               </div>
           </div>
         </div>
       <div class="col-md-1 user-menu-btns">
           <div class="btn-group-vertical square" id="responsive">
               <a href="#" class="btn btn-block btn-default active">
-                <i class="fa fa-bell-o fa-3x"></i>
+                <i class="fa fa-bell-o fa-3x"><h4 style="color:white">Your friends activity</h4></i>
               </a>
               <a href="#" class="btn btn-default">
-                <i class="fa fa-envelope-o fa-3x"></i>
+                <i class="fa fa-envelope-o fa-3x"><h4 style="color:white">Your Activity</h4></i>
               </a>
               <a href="#" class="btn btn-default">
-                <i class="fa fa-laptop fa-3x"></i>
+                <i class="fa fa-laptop fa-3x"><h4 style="color:white">Trending</h4></i>
               </a>
               <a href="#" class="btn btn-default">
-                <i class="fa fa-cloud-upload fa-3x"></i>
+                <i class="fa fa-cloud-upload fa-3x"><h4 style="color:white">Sharing your achivements</h4></i>
               </a>
           </div>
       </div>
@@ -211,16 +217,16 @@
               </h3>
               <ul class="user-menu-list">
                   <li>
-                      <h4><i class="fa fa-user coral"></i> Roselynn Smith challenged you in <strong class="coral">task 100</strong>.</h4>
+                      <h4><i class="fa fa-user coral"></i> Eeva Järvinen challenged you in <strong class="green">task 100</strong>.</h4>
                   </li>
                   <li>
-                      <h4><i class="fa fa-heart-o coral"></i> Jonathan Hawkins completed <strong class="coral">task 2</strong>.</h4>
+                      <h4><i class="fa fa-heart-o coral"></i> Juha Salminen completed <strong class="green">task 2</strong>.</h4>
                   </li>
                   <li>
-                      <h4><i class="fa fa-paper-plane-o coral"></i> Gracie Jenkins followed you.</h4>
+                      <h4><i class="fa fa-paper-plane-o coral"></i> Kimmo Nieminen followed you.</h4>
                   </li>
                   <li>
-                      <button type="button" class="btn btn-labeled btn-success" href="#">
+                      <button type="button" class="btn btn-labeled btn-success greenbrg" href="#">
                           <span class="btn-label"><i class="fa fa-bell-o"></i></span>View all activity</button>
                   </li>
               </ul>
@@ -231,16 +237,16 @@
               </h3>
               <ul class="user-menu-list">
                   <li>
-                      <h4>You completed <strong class="coral">task 4</strong> at <i class="fa fa-clock-o"></i> 7:42 A.M.</small></h4>
+                      <h4>You completed <strong class="green">task 4</strong> at <i class="fa fa-clock-o"></i> 7:42 A.M.</small></h4>
                   </li>
                   <li>
-                      <h4>You earned  <strong class="turq">2500 points</strong><i class="fa fa-clock-o"></i> 10:42 A.M.</small></h4>
+                      <h4>You earned  <strong class="blue">2500 points</strong><i class="fa fa-clock-o"></i> 10:42 A.M.</small></h4>
                   </li>
                   <li>
-                      <h4>You completed <strong class="coral">task 3</strong><i class="fa fa-clock-o"></i> 10:42 A.M.</h4>
+                      <h4>You completed <strong class="green">task 3</strong><i class="fa fa-clock-o"></i> 10:42 A.M.</h4>
                   </li>
                   <li>
-                      <button type="button" class="btn btn-labeled btn-danger" href="#">
+                      <button type="button" class="btn btn-labeled btn-danger greenbrg" href="#">
                           <span class="btn-label"><i class="fa fa-envelope-o"></i></span>View All Messages</button>
                   </li>
               </ul>
@@ -260,9 +266,9 @@
                           <img src="https://cdn4.iconfinder.com/data/icons/customer-support/500/peak-512.png" class="img-responsive">
                       </div>
                       <div class="info">
-                          <p class="small coral text-center"><i class="fa fa-clock-o"></i> Next peak time</small>
+                          <p class="small green text-center"><i class="fa fa-clock-o"></i> Next peak time</small>
                       </div>
-                      <div class="stats turqbg">
+                      <div class="stats bluebrg">
                           <p class="text-center">18:00</p>
                       </div>
                   </div>
@@ -274,10 +280,10 @@
               </h2>
               <center><i class="fa fa-cloud-upload fa-4x"></i></center>
               <div class="share-links">
-                  <center><button type="button" class="btn btn-lg btn-labeled btn-success" href="#" style="margin-bottom: 15px;">
+                  <center><button type="button" class="btn btn-lg btn-labeled btn-success greenbrg" href="#" style="margin-bottom: 15px;">
                           <span class="btn-label"><i class="fa fa-bell-o"></i></span>YOUR SAVING
                   </button></center>
-                  <center><button type="button" class="btn btn-lg btn-labeled btn-warning" href="#">
+                  <center><button type="button" class="btn btn-lg btn-labeled btn-warning bluebrg" href="#">
                           <span class="btn-label"><i class="fa fa-bell-o"></i></span>YOUR RANK
                   </button></center>
               </div>

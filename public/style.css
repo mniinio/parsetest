@@ -64,7 +64,7 @@ div.user-menu-container .btn-group-vertical {
 
 div.user-menu-container .btn-group-vertical>a {
     padding: 20px 25px;
-    background-color: #46D8D2;
+    background-color: #83a4e8;
     color: white;
     border-color: #fff;
 }
@@ -75,7 +75,7 @@ div.btn-group-vertical>a:hover {
 }
 
 div.btn-group-vertical>a.active {
-    background: #FA396F;
+    background: #497c78;
     box-shadow: none;
     color: white;
 }
@@ -220,4 +220,35 @@ div.user-menu div.user-menu-content:not(.active){
     .user-image {
         max-height: 400px;
     }
+}
+
+.ui.inverted.white.menu {
+  background-color: #ffffff;
+}
+
+.ui.inverted.green.menu {
+  background-color: #497c78;
+}
+
+.green {
+  color:#497c78;
+}
+
+.greenbrg {
+  background-color:#497c78;
+}
+
+.blue {
+  color:#83a4e8;
+}
+
+.bluebrg {
+  background-color:#83a4e8;
+}
+
+.yellow {
+  color:#efefef;
+}
+.yellowbrg {
+  background-color:#efefef;
 }

@@ -40,10 +40,11 @@ window.addEventListener('load', () => {
     let html = ratesTemplate();
     el.html(html);
     try {
-        // Load Currency Rates
-        const response = await api.get('/rates');
-        const { base, date, rates } = response.data;
-        // Display Rates Table
+      console.clear();
+
+      setTimeout(function(){
+        document.querySelector('input[type="checkbox"]').setAttribute('checked',true);
+      },100);
         html = ratesTemplate({ base, date, rates });
         el.html(html);
     } catch (error) {
