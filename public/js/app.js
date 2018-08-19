@@ -1,13 +1,13 @@
 window.addEventListener('load', () => {
     const el = $('#app');
-  
+
     // Compile Handlebar Templates
     const errorTemplate = Handlebars.compile($('#error-template').html());
     const ratesTemplate = Handlebars.compile($('#rates-template').html());
     const exchangeTemplate = Handlebars.compile($('#exchange-template').html());
     const historicalTemplate = Handlebars.compile($('#historical-template').html());
-    const teamTemplate = Handlebars.compile($('#team-template').html());
-  
+    const profileTemplate = Handlebars.compile($('#profile-template').html());
+
     // Router Declaration
     const router = new Router({
         mode: 'history',
@@ -40,10 +40,11 @@ window.addEventListener('load', () => {
     let html = ratesTemplate();
     el.html(html);
     try {
-        // Load Currency Rates
-        const response = await api.get('/rates');
-        const { base, date, rates } = response.data;
-        // Display Rates Table
+      console.clear();
+
+      setTimeout(function(){
+        document.querySelector('input[type="checkbox"]').setAttribute('checked',true);
+      },100);
         html = ratesTemplate({ base, date, rates });
         el.html(html);
     } catch (error) {
@@ -52,7 +53,7 @@ window.addEventListener('load', () => {
         // Remove loader status
         $('.loading').removeClass('loading');
     }
-    });      
+    });
     // Perform POST request, calculate and display conversion results
     const getConversionResults = async () => {
         // Extract form data
@@ -71,7 +72,7 @@ window.addEventListener('load', () => {
         $('#result-segment').removeClass('loading');
         }
     };
-    
+
     // Handle Convert Button Click Event
     const convertRatesHandler = () => {
         if ($('.ui.form').form('is valid')) {
@@ -85,7 +86,7 @@ window.addEventListener('load', () => {
         }
         return true;
     };
-    
+
     router.add('/exchange', async () => {
         // Display loader first
         let html = exchangeTemplate();
@@ -111,7 +112,7 @@ window.addEventListener('load', () => {
         showError(error);
         }
     });
-        
+
     const getHistoricalRates = async () => {
         const date = $('#date').val();
         try {
@@ -125,7 +126,7 @@ window.addEventListener('load', () => {
           $('.segment').removeClass('loading');
         }
       };
-      
+
       const historicalRatesHandler = () => {
         if ($('.ui.form').form('is valid')) {
          n // hide error message
@@ -138,7 +139,7 @@ window.addEventListener('load', () => {
         }
         return true;
       };
-      
+
       router.add('/historical', () => {
         // Display form
         const html = historicalTemplate();
@@ -158,7 +159,7 @@ window.addEventListener('load', () => {
         });
         $('.submit').click(historicalRatesHandler);
       });
-      
+
       //TEAM
 
       const createNewTeam = async () => {
@@ -174,14 +175,14 @@ window.addEventListener('load', () => {
           $('.segment').removeClass('loading');
         }
       };
-      
+
       const getTeams = async () => {
         try {
             const response = await api.get('/teams');
             const { results } = response.data;
             console.log(response.data);
             console.log("ollaan app.js");
-            console.log( { results });    
+            console.log( { results });
           const html = teamTemplate({ results });
           $('#team-table').html(html);
         } catch (error) {
@@ -190,7 +191,7 @@ window.addEventListener('load', () => {
           $('.segment').removeClass('loading');
         }
       };
-      
+
       const teamsHandler = () => {
         console.log("handlerissa");
         if ($('.ui.form').form('is valid')) {
@@ -208,42 +209,66 @@ window.addEventListener('load', () => {
         return true;
       };
 
- 
-      
-      router.add('/teampage', async () => {
+
+
+      router.add('/profile', async () => {
         // Display form
-        const html = teamTemplate();
+        const html = profileTemplate();
         el.html(html);
         // Validate text input
-        $('.ui.form').form({
-          fields: {
-            teamName: 'empty',
-          },
+
+          var $btnSets = $('#responsive'),
+          $btnLinks = $btnSets.find('a');
+
+          $btnLinks.click(function(e) {
+            e.preventDefault();
+            $(this).siblings('a.active').removeClass("active");
+            $(this).addClass("active");
+          var index = $(this).index();
+          $("div.user-menu>div.user-menu-content").removeClass("active");
+          $("div.user-menu>div.user-menu-content").eq(index).addClass("active");
         });
-        $('.submit').click(teamsHandler);
-      });
-      
+
+        $("[rel='tooltip']").tooltip();
+
+        $('.view').hover(
+      function(){
+          $(this).find('.caption').slideDown(250); //.fadeIn(250)
+      },
+      function(){
+          $(this).find('.caption').slideUp(250); //.fadeOut(205)
+      }
+  );
+
+
+
+
+
+
+
+});
+
 
 
       // Navigate app to current url
       router.navigateTo(window.location.pathname);
-      
+
        // Highlight Active Menu on Refresh/Page Reload
       const link = $(`a[href$='${window.location.pathname}']`);
       link.addClass('active');
-      
+
       $('a').on('click', (event) => {
         // Block browser page load
         event.preventDefault();
-      
+
         // Highlight Active Menu on Click
         const target = $(event.target);
         $('.item').removeClass('active');
         target.addClass('active');
-      
+
         // Navigate to clicked url
         const href = target.attr('href');
         const path = href.substr(href.lastIndexOf('/'));
         router.navigateTo(path);
-      });  
+      });
   });
