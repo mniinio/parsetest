@@ -159,7 +159,12 @@
     <script id="exchange-template" type="text/x-handlebars-template">
         <h1 class="ui header white user-pad text-center">Your Energy Consumption</h1>
         <hr>
-        <div class="ui container" style="position: relative; overflow: hidden;">
+
+
+        <div class="container">
+
+        <div class="row">
+          <h2 class="text-center">Your energy Consumption</h2>
         <div id="chartdiv"></div>
 		<style>
 		#chartdiv {
@@ -1353,7 +1358,73 @@ function zoomChart() {
 //]]>
 </script>
       </div>
-      </script>
+
+
+      </div>
+
+
+      <div class="row">
+
+          <div class="wrapper">
+            <div class="banner_content">
+               <div class="banner_wrapper">
+                  <div class="col-md-7">
+                      <h2 class="white text-center">Leaderboard</h2>
+                        <ol id="board" class="leaderboard">
+
+                        </ol>
+                      </div>
+                    </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+      //<![CDATA[
+      var leaders= [
+        {
+        name:"Your Team",
+        points:"124321"},
+        {
+        name:"Franz Team",
+        points:"28415"},
+        {
+        name:"Electro ",
+        points:"27231"},
+        {
+        name:"Gunther Lewis",
+        points:"23921"},
+        {
+        name:"Bran Jacks",
+        points:"23134"},
+        {
+        name:"Katey Wen",
+        points:"22313"}
+      ];
+      var x;
+
+      for (x in leaders){
+        document.getElementById('board').innerHTML+=
+         '<li class="rank">'+
+          '<h2 class="name">'
+            +leaders[x].name+
+          '</h2>'+
+            '<small class="pts">'
+              +leaders[x].points+
+           '</small></li>';
+        console.log(leaders[x]);
+
+
+
+
+
+      }
+
+      //]]> </script>
+      </div>
+
+
+
+
+</script>
 
       <script id="historical-template" type="text/x-handlebars-template">
         <h1 class="ui header">Historical Rates</h1>
